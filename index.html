@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jiawei Huang</title>
+<meta name="description" content="Jiawei Huang is Assistant Professor of Operations and Data Science at Católica Lisbon School of Business and Economics.">
+<meta property="og:title" content="Jiawei Huang">
+<meta property="og:description" content="Assistant Professor of Operations and Data Science, Católica Lisbon School of Business and Economics.">
+<meta property="og:type" content="profile">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:      #1a1815;
+    --ink-soft: #5d5952;
+    --ink-faint:#918b81;
+    --paper:    #fcfbf9;
+    --accent:   #6e2a2a;
+    --line:     #e2ded7;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    /* Chinese name. To swap: change the first family below and the matching
+       &family= in the Google Fonts link above.
+         "Noto Serif SC"   Song/serif, formal, matches the English face  (current)
+         "Ma Shan Zheng"   brush kai, signature-like
+         "Zhi Mang Xing"   running script, more personal, less legible
+         "ZCOOL XiaoWei"   display serif, geometric                        */
+    --cjk: "Noto Serif SC", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:var(--accent); text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:.5px; }
+  a:hover{ text-decoration-thickness:1.5px; }
+  a:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  .wrap{ max-width:880px; margin:0 auto; padding:0 36px 104px; }
+
+  /* masthead ------------------------------------------------ */
+
+  .top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:36px;
+    flex-wrap:wrap;
+    padding:58px 0 18px;
+  }
+  h1{
+    font-size:clamp(1.9rem, 4.2vw, 2.5rem);
+    font-weight:400;
+    letter-spacing:-0.016em;
+    line-height:1.1;
+    margin:0;
+  }
+  h1 .cn{
+    font-family:var(--cjk);
+    font-size:.68em;
+    font-weight:400;
+    color:var(--ink-soft);
+    letter-spacing:.03em;
+    margin-left:.44em;
+  }
+
+  nav{ display:flex; gap:20px; font-size:.9rem; }
+  nav a{ color:var(--ink-soft); text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent; }
+  nav a:hover{ color:var(--ink); border-bottom-color:var(--line); }
+  nav a.is-current{ color:var(--accent); border-bottom-color:var(--accent); }
+
+  .rule{ border:none; border-top:1px solid var(--line); margin:0 0 40px; }
+
+  /* intro --------------------------------------------------- */
+
+  .intro{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 172px;
+    gap:44px;
+    align-items:start;
+    margin-bottom:76px;
+  }
+  .intro-lead{ font-size:1.36rem; line-height:1.44; font-weight:400; margin:0 0 1em; letter-spacing:-0.008em; }
+  .portrait{ width:100%; border-radius:2px; display:block; }
+  .affil{ font-size:.86rem; color:var(--ink-soft); margin:12px 0 0; line-height:1.55; }
+  .affil a{ color:var(--ink-soft); }
+
+  ol.themes{ margin:0 0 1.05em; padding-left:1.35em; }
+  ol.themes li{ margin-bottom:.5em; padding-left:.15em; }
+  ol.themes li:last-child{ margin-bottom:0; }
+  ol.themes li::marker{ color:var(--ink-faint); }
+  .strand{ font-style:italic; font-weight:400; }
+
+  /* sections ------------------------------------------------ */
+
+  section{ margin-bottom:76px; max-width:660px; }
+  section:last-of-type{ margin-bottom:0; }
+
+  h2{
+    font-size:1.5rem;
+    font-weight:400;
+    font-style:italic;
+    letter-spacing:-0.01em;
+    margin:0 0 24px;
+  }
+  h3{
+    font-size:.98rem;
+    font-weight:500;
+    color:var(--ink-faint);
+    font-style:italic;
+    margin:36px 0 14px;
+  }
+  h3:first-of-type{ margin-top:0; }
+
+  p{ margin:0 0 1.05em; }
+  p:last-child{ margin-bottom:0; }
+
+  ul.entries{ list-style:none; margin:0; padding:0; }
+  .entry{ margin-bottom:22px; padding-left:22px; text-indent:-22px; }
+  .entry:last-child{ margin-bottom:0; }
+  .entry p{ margin:0; text-indent:0; }
+  .authors{ color:var(--ink-soft); }
+  .authors b{ font-weight:500; color:var(--ink); }
+  .title{ line-height:1.45; }
+  .venue{ color:var(--ink-soft); font-size:.94rem; }
+  .stamp{ font-style:italic; color:var(--ink-faint); font-size:.94rem; }
+
+  .note{ color:var(--ink-soft); }
+
+  footer{ margin-top:88px; padding-top:20px; border-top:1px solid var(--line); font-size:.84rem; color:var(--ink-faint); }
+
+  @media (max-width:760px){
+    .wrap{ padding:0 22px 72px; }
+    .top{ padding-top:38px; gap:16px; }
+    nav{ flex-wrap:wrap; gap:14px; }
+    .intro{ grid-template-columns:1fr; gap:26px; margin-bottom:52px; }
+    .portrait{ width:140px; }
+    section{ margin-bottom:52px; }
+  }
+  @media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>Jiawei Huang <span class="cn">黄嘉炜</span></h1>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#contact">Contact</a>
+      <a href="CV_Jiawei_Huang.pdf">CV</a>
+    </nav>
+  </header>
+  <hr class="rule">
+
+  <div class="intro" id="about">
+    <div>
+      <p class="intro-lead">My research sits at the intersection of statistics, artificial intelligence, and business.</p>
+
+      <p>I am Assistant Professor of Operations and Data Science at <a href="https://www.clsbe.lisboa.ucp.pt/catolica-lisbon-school-business-economics">Católica Lisbon School of Business and Economics</a>. I received my Ph.D. in Business Analytics from the Carl H. Lindner College of Business at the University of Cincinnati, an M.S. in Statistics from the University of Wisconsin–Madison, and a B.S. in Statistics from Renmin University of China.</p>
+
+      <p>My research centers on two themes:</p>
+      <ol class="themes">
+        <li><span class="strand">Novel statistical methodology.</span> I contribute to nominal data analysis, configurational methods, and overparameterized models, with applications in socioeconomics, finance, and information systems.</li>
+        <li><span class="strand">AI adoption for analytics.</span> I study how AI is adopted for analytics, from large-scale text and organizational data to AI-supported experiments and systems.</li>
+      </ol>
+
+      <p>I am also actively engaged in industry collaboration. Working with several partners, I have developed methods and systems that were carried through from problem definition to deployment.</p>
+    </div>
+    <div>
+      <img class="portrait" src="profile.jpg" alt="Jiawei Huang">
+      <p class="affil"><a href="mailto:jhuang@ucp.pt">jhuang@ucp.pt</a><br>
+      <a href="https://scholar.google.com/citations?user=SL0rwXIAAAAJ&hl=en">Google Scholar</a><br>
+      <a href="https://www.linkedin.com/in/jiawei-huang-202b03206/">LinkedIn</a></p>
+    </div>
+  </div>
+
+  <section id="research">
+    <h2>Research</h2>
+
+    <h3>Published</h3>
+    <ul class="entries">
+      <li class="entry">
+        <p class="authors">Nam D. Nguyen, <b>Jiawei Huang</b>, Daifeng Wang (2022)</p>
+        <p class="title">A Deep Manifold-Regularized Learning Model for Improving Phenotype Prediction from Multi-Modal Data</p>
+        <p class="venue"><em>Nature Computational Science</em>, 2(1), 38–46. <a href="https://www.nature.com/articles/s43588-021-00185-x">Article</a></p>
+      </li>
+      <li class="entry">
+        <p class="authors"><b>Jiawei Huang</b>, Jie Sheng, Daifeng Wang (2021)</p>
+        <p class="title">Manifold Learning Analysis Suggests Strategies to Align Single-Cell Multimodal Data of Neuronal Electrophysiology and Transcriptomics</p>
+        <p class="venue"><em>Communications Biology</em>, 4, 1308. <a href="https://www.nature.com/articles/s42003-021-02807-6">Article</a></p>
+      </li>
+      <li class="entry">
+        <p class="authors">Ting Jin, Peter Rehani, Mufang Ying, <b>Jiawei Huang</b>, Shuang Liu, Panagiotis Roussos, Daifeng Wang (2021)</p>
+        <p class="title">scGRNom: A Computational Pipeline of Integrative Multi-Omics Analyses for Predicting Cell-Type Disease Genes and Regulatory Networks</p>
+        <p class="venue"><em>Genome Medicine</em>, 13(1), 95. <a href="https://link.springer.com/article/10.1186/s13073-021-00908-9">Article</a></p>
+      </li>
+    </ul>
+
+    <h3>Under review</h3>
+    <ul class="entries">
+      <li class="entry">
+        <p class="authors"><b>Jiawei Huang</b>, Dungang Liu, Yuan Jiang, Yu Xie</p>
+        <p class="title">An “<em>i</em>-Mobility” Framework for Studying Social Mobility: Individualized Inference via Generative Analysis of Discrete Data</p>
+        <p class="stamp">Under review</p>
+      </li>
+      <li class="entry">
+        <p class="authors"><b>Jiawei Huang</b>, Kanix Wang, Michael J. Fry</p>
+        <p class="title">Leveraging Generative AI Models for Textual Analysis in Healthcare Human Resources Operations</p>
+        <p class="stamp">Major revision</p>
+      </li>
+      <li class="entry">
+        <p class="authors">Hui Guo, <b>Jiawei Huang</b>, Yan Yu</p>
+        <p class="title">(Mis)Understanding Benign Overfitting in Equity Return Prediction</p>
+        <p class="stamp">Under review</p>
+      </li>
+      <li class="entry">
+        <p class="authors"><b>Jiawei Huang</b>, Michael J. Fry, Scott Dust, Sharmeen M. Merchant, Luciana Zheng Manroop</p>
+        <p class="title">I Will Pay You Back in the Future: Employees’ On-Job Perceptions of Organizations and Their Intention of Making Post-Turnover Employment Referrals</p>
+        <p class="stamp">Under review</p>
+      </li>
+    </ul>
+
+    <h3>In progress</h3>
+    <ul class="entries">
+      <li class="entry">
+        <p class="authors">Yanran Liu, Peng Wang, <b>Jiawei Huang</b>, Zewei Lin, Arun Rai</p>
+        <p class="title">Finite-Sample Variable Prescreening Methods for Qualitative Comparative Analysis</p>
+      </li>
+      <li class="entry">
+        <p class="authors"><b>Jiawei Huang</b>, Yanran Liu</p>
+        <p class="title">The Configuration–Regression Nexus: A Systematic Review of Methodological Friction and Integration</p>
+      </li>
+    </ul>
+
+    <h3>Industry-partnered research</h3>
+    <p class="note">Applied analytics projects with Ryerson Inc., HSD Metrics, Drees Homes, and ABC Fitness.</p>
+  </section>
+
+  <section id="teaching">
+    <h2>Teaching</h2>
+
+    <h3>Católica Lisbon</h3>
+    <ul class="entries">
+      <li class="entry">
+        <p class="title">Causality and Randomized Experiments</p>
+        <p class="venue">Master's, 2027</p>
+      </li>
+      <li class="entry">
+        <p class="title">Business Research Methods</p>
+        <p class="venue">Master's, 2026</p>
+      </li>
+    </ul>
+
+    <h3>University of Cincinnati</h3>
+    <ul class="entries">
+      <li class="entry">
+        <p class="title">Probability Models</p>
+        <p class="venue">Master's, 2025 — evaluation 5.0 / 5.0</p>
+      </li>
+      <li class="entry">
+        <p class="title">Statistical Computing</p>
+        <p class="venue">Master's, 2025 — evaluation 4.6 / 5.0</p>
+      </li>
+      <li class="entry">
+        <p class="title">Descriptive Analytics and Data Visualization</p>
+        <p class="venue">Undergraduate, 2024 and 2022 — evaluations 4.7 and 4.4 / 5.0</p>
+      </li>
+    </ul>
+
+    <h3>Mentoring</h3>
+    <ul class="entries">
+      <li class="entry">
+        <p class="title">Discussant, MS dissertation defenses</p>
+        <p class="venue">University of Cincinnati, multiple cohorts</p>
+      </li>
+      <li class="entry">
+        <p class="title">Second reader, MSBA capstone projects</p>
+        <p class="venue">University of Cincinnati, multiple cohorts</p>
+      </li>
+      <li class="entry">
+        <p class="title">Mentor, UC Center for Business Analytics</p>
+        <p class="venue">Supervised two undergraduate students in Business Analytics and two master's students in Computer Science on industry projects with Drees Homes and ABC Fitness</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Students and prospective collaborators are welcome to write to me at <a href="mailto:jhuang@ucp.pt">jhuang@ucp.pt</a>, or to reach out on <a href="https://www.linkedin.com/in/jiawei-huang-202b03206/">LinkedIn</a>.</p>
+    <p class="note"><a href="https://www.clsbe.lisboa.ucp.pt/catolica-lisbon-school-business-economics">Católica Lisbon School of Business and Economics</a><br>
+    Caminho de Palma de Cima, 1649-023 Lisboa, Portugal</p>
+  </section>
+
+  <footer>Last updated September 2026</footer>
+</div>
+
+<script>
+(function(){
+  var links = [].slice.call(document.querySelectorAll('nav a[href^="#"]'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if(!('IntersectionObserver' in window) || !sections.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      links.forEach(function(a){ a.classList.toggle('is-current', a.getAttribute('href') === '#' + e.target.id); });
+    });
+  }, { rootMargin:'-15% 0px -75% 0px' });
+  sections.forEach(function(s){ io.observe(s); });
+})();
+</script>
+</body>
+</html>
