@@ -1,325 +1,646 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jiawei Huang</title>
-<meta name="description" content="Jiawei Huang is Assistant Professor of Data Science at Católica Lisbon School of Business and Economics.">
-<meta property="og:title" content="Jiawei Huang">
-<meta property="og:description" content="Assistant Professor of Data Science, Católica Lisbon School of Business and Economics.">
-<meta property="og:type" content="profile">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jiawei Huang — Operations &amp; Data Science</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:      #1a1815;
-    --ink-soft: #5d5952;
-    --ink-faint:#918b81;
-    --paper:    #fcfbf9;
-    --accent:   #6e2a2a;
-    --line:     #e2ded7;
-    --serif: "Newsreader", Georgia, "Times New Roman", serif;
-    /* Chinese name. To swap: change the first family below and the matching
-       &family= in the Google Fonts link above.
-         "Noto Serif SC"   Song/serif, formal, matches the English face  (current)
-         "Ma Shan Zheng"   brush kai, signature-like
-         "Zhi Mang Xing"   running script, more personal, less legible
-         "ZCOOL XiaoWei"   display serif, geometric                        */
-    --cjk: "Noto Serif SC", "Songti SC", "SimSun", "PingFang SC", "Microsoft YaHei", serif;
+    --paper:#EFEDE4;
+    --paper-alt:#E5E0D2;
+    --ink:#1C1B17;
+    --ink-soft:#5B584C;
+    --ink-faint:#8B876F;
+    --rule:#C9C1A6;
+    --blue:#2E4374;
+    --blue-soft:#5C6E9C;
+    --brick:#A34B31;
+    --paper-rgb: 239,237,228;
+    --maxw: 760px;
   }
-  *,*::before,*::after{ box-sizing:border-box; }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
 
   body{
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:var(--serif);
-    font-size:18px;
-    line-height:1.62;
-    -webkit-font-smoothing:antialiased;
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    background-image:
+      radial-gradient(circle, rgba(46,67,116,0.10) 1px, transparent 1px);
+    background-size: 26px 26px;
   }
 
-  a{ color:var(--accent); text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:.5px; }
-  a:hover{ text-decoration-thickness:1.5px; }
-  a:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  a{color:var(--blue); text-decoration:none; border-bottom:1px solid rgba(46,67,116,0.35);}
+  a:hover{border-bottom-color:var(--blue);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--brick); outline-offset:3px;}
 
-  .wrap{ max-width:880px; margin:0 auto; padding:0 36px 104px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
 
-  /* masthead ------------------------------------------------ */
+  h1,h2,h3{
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+  }
 
-  .top{
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px clamp(20px, 5vw, 56px);
+    background:rgba(var(--paper-rgb),0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav .nav-name{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.03em;
+    color:var(--ink);
+    border:none;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:clamp(16px, 3vw, 32px);
+    margin:0; padding:0;
+  }
+  nav a{
+    border:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    position:relative;
+    padding-bottom:3px;
+  }
+  nav a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0%; height:1.5px;
+    background:var(--brick);
+    transition:width .25s ease;
+  }
+  nav a:hover::after, nav a.active::after{width:100%;}
+  nav a:hover{color:var(--ink);}
+
+  /* ---------- LAYOUT ---------- */
+  section{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:88px clamp(20px, 5vw, 0px) 40px;
+  }
+  .section-head{
     display:flex;
     align-items:baseline;
-    justify-content:space-between;
-    gap:36px;
-    flex-wrap:wrap;
-    padding:58px 0 18px;
+    gap:14px;
+    margin-bottom:36px;
   }
-  h1{
-    font-size:clamp(1.9rem, 4.2vw, 2.5rem);
-    font-weight:400;
-    letter-spacing:-0.016em;
-    line-height:1.1;
-    margin:0;
+  .section-head .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--brick);
+    font-size:0.9rem;
   }
-  h1 .cn{
-    font-family:var(--cjk);
-    font-size:.68em;
-    font-weight:400;
-    color:var(--ink-soft);
-    letter-spacing:.03em;
-    margin-left:.44em;
+  .section-head h2{font-size:1.9rem;}
+  .section-head .rule{flex:1; height:1px; background:var(--rule); margin-left:8px;}
+
+  .fade-in{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .7s ease, transform .7s ease;
   }
+  .fade-in.visible{opacity:1; transform:translateY(0);}
 
-  nav{ display:flex; gap:20px; font-size:.9rem; }
-  nav a{ color:var(--ink-soft); text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent; }
-  nav a:hover{ color:var(--ink); border-bottom-color:var(--line); }
-  nav a.is-current{ color:var(--accent); border-bottom-color:var(--accent); }
-
-  .rule{ border:none; border-top:1px solid var(--line); margin:0 0 40px; }
-
-  /* intro --------------------------------------------------- */
-
-  .intro{
+  /* ---------- HERO ---------- */
+  header.hero{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:96px clamp(20px,5vw,0px) 60px;
+    position:relative;
+  }
+  .hero-grid{
     display:grid;
-    grid-template-columns:minmax(0,1fr) 172px;
-    gap:44px;
-    align-items:start;
-    margin-bottom:76px;
+    grid-template-columns: 1.35fr 1fr;
+    gap:40px;
+    align-items:center;
   }
-  .intro-lead{ font-size:1.36rem; line-height:1.44; font-weight:400; margin:0 0 1em; letter-spacing:-0.008em; }
-  .portrait{ width:100%; border-radius:2px; display:block; }
-  .affil{ font-size:.86rem; color:var(--ink-soft); margin:12px 0 0; line-height:1.55; }
-  .affil a{ color:var(--ink-soft); }
+  @media (max-width:680px){ .hero-grid{grid-template-columns:1fr;} }
 
-  ol.themes{ margin:0 0 1.05em; padding-left:1.35em; }
-  ol.themes li{ margin-bottom:.5em; padding-left:.15em; }
-  ol.themes li:last-child{ margin-bottom:0; }
-  ol.themes li::marker{ color:var(--ink-faint); }
-  .strand{ font-style:italic; font-weight:400; }
-
-  /* sections ------------------------------------------------ */
-
-  section{ margin-bottom:76px; max-width:660px; }
-  section:last-of-type{ margin-bottom:0; }
-
-  h2{
-    font-size:1.5rem;
-    font-weight:400;
-    font-style:italic;
-    letter-spacing:-0.01em;
-    margin:0 0 24px;
+  header.hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.1rem);
+    line-height:1.08;
+    margin-top:10px;
   }
-  h3{
-    font-size:.98rem;
-    font-weight:500;
+  header.hero .role{
+    margin-top:14px;
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:44ch;
+  }
+  header.hero .role strong{color:var(--ink); font-weight:500;}
+
+  .contact-line{
+    margin-top:26px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+  }
+  .contact-line a{border-bottom:1px solid rgba(46,67,116,0.35);}
+
+  .hero-actions{margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:11px 20px;
+    border:1px solid var(--ink);
+    border-radius:2px;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);
+    transition:background .2s ease, color .2s ease;
+  }
+  .btn:hover{background:var(--ink); color:var(--paper);}
+  .btn.primary{background:var(--blue); color:var(--paper); border-color:var(--blue);}
+  .btn.primary:hover{background:var(--ink); border-color:var(--ink);}
+
+  /* manifold svg */
+  .manifold-wrap{display:flex; justify-content:center; align-items:center;}
+  .manifold-wrap svg{width:100%; height:auto; max-width:280px;}
+  .manifold-caption{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.66rem;
     color:var(--ink-faint);
+    letter-spacing:0.05em;
+    margin-top:6px;
+  }
+  .pt{ animation: drift 7s ease-in-out infinite; }
+  @keyframes drift{
+    0%,100%{ transform:translateY(0px); }
+    50%{ transform:translateY(-3px); }
+  }
+
+  /* ---------- MAIN / ABOUT CONTENT ---------- */
+  .subhead{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:14px;
+  }
+
+  .edu-row{
+    display:grid;
+    grid-template-columns: 130px 1fr;
+    gap:18px;
+    padding:16px 0;
+    border-top:1px solid var(--rule);
+  }
+  .edu-row:last-child{border-bottom:1px solid var(--rule);}
+  .edu-row .years{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--ink-faint);
+    padding-top:2px;
+  }
+  .edu-row .degree{font-weight:600; font-family:'Source Serif 4', serif; font-size:1.05rem;}
+  .edu-row .inst{color:var(--ink-soft); font-size:0.92rem; margin-top:2px;}
+
+  .block-title{
+    font-family:'Source Serif 4', serif;
+    font-size:1.25rem;
+    margin:44px 0 16px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--rule);
+  }
+
+  .award-list{list-style:none; margin:0; padding:0;}
+  .award-list li{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:10px 0;
+    border-bottom:1px dashed var(--rule);
+    font-size:0.94rem;
+  }
+  .award-list li:last-child{border-bottom:none;}
+  .award-list .yr{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    white-space:nowrap;
+    padding-top:2px;
+  }
+
+  .service-cols{display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:8px;}
+  @media (max-width:640px){ .service-cols{grid-template-columns:1fr;} }
+  .service-cols h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-faint);
+    margin:0 0 10px;
+  }
+  .service-cols ul{margin:0; padding-left:18px; color:var(--ink-soft); font-size:0.92rem;}
+  .service-cols li{margin-bottom:8px;}
+  .service-cols li .yr{color:var(--ink-faint); font-family:'IBM Plex Mono', monospace; font-size:0.78rem;}
+
+  /* ---------- RESEARCH ---------- */
+  .pub{
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:14px;
+    padding:18px 0;
+    border-top:1px solid var(--rule);
+  }
+  .pub:last-child{border-bottom:1px solid var(--rule);}
+  .pub .idx{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--brick);
+    font-size:0.9rem;
+    padding-top:2px;
+  }
+  .pub .authors{font-size:0.88rem; color:var(--ink-soft);}
+  .pub .authors .me{color:var(--ink); font-weight:600;}
+  .pub .title{font-family:'Source Serif 4', serif; font-size:1.02rem; margin:3px 0 4px;}
+  .pub .venue{font-size:0.85rem; font-style:italic; color:var(--ink-soft);}
+  .pub .tag{
+    display:inline-block;
+    margin-left:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--blue-soft);
+    border:1px solid var(--blue-soft);
+    border-radius:2px;
+    padding:1px 6px;
+    font-style:normal;
+  }
+
+  .collab-line{
+    margin-top:6px;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+  }
+
+  .pres-group{margin-bottom:30px;}
+  .pres-group h4{
+    font-family:'Source Serif 4', serif;
+    font-size:1.05rem;
     font-style:italic;
-    margin:36px 0 14px;
+    margin:0 0 10px;
+    color:var(--ink);
   }
-  h3:first-of-type{ margin-top:0; }
-
-  p{ margin:0 0 1.05em; }
-  p:last-child{ margin-bottom:0; }
-
-  ul.entries{ list-style:none; margin:0; padding:0; }
-  .entry{ margin-bottom:22px; padding-left:22px; text-indent:-22px; }
-  .entry:last-child{ margin-bottom:0; }
-  .entry p{ margin:0; text-indent:0; }
-  .authors{ color:var(--ink-soft); }
-  .authors b{ font-weight:500; color:var(--ink); }
-  .title{ line-height:1.45; }
-  .venue{ color:var(--ink-soft); font-size:.94rem; }
-  .stamp{ font-style:italic; color:var(--ink-faint); font-size:.94rem; }
-
-  .note{ color:var(--ink-soft); }
-
-  footer{ margin-top:88px; padding-top:20px; border-top:1px solid var(--line); font-size:.84rem; color:var(--ink-faint); }
-
-  @media (max-width:760px){
-    .wrap{ padding:0 22px 72px; }
-    .top{ padding-top:38px; gap:16px; }
-    nav{ flex-wrap:wrap; gap:14px; }
-    .intro{ grid-template-columns:1fr; gap:26px; margin-bottom:52px; }
-    .portrait{ width:140px; }
-    section{ margin-bottom:52px; }
+  .pres-group ul{list-style:none; margin:0; padding:0;}
+  .pres-group li{
+    display:flex;
+    gap:14px;
+    padding:8px 0;
+    border-top:1px dashed var(--rule);
+    font-size:0.88rem;
+    color:var(--ink-soft);
   }
-  @media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth; } }
+  .pres-group li .when{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--ink-faint);
+    white-space:nowrap;
+    min-width:70px;
+  }
+
+  /* ---------- TEACHING ---------- */
+  .course-table{width:100%; border-collapse:collapse; margin-top:6px;}
+  .course-table td{
+    padding:12px 0;
+    border-top:1px solid var(--rule);
+    font-size:0.92rem;
+    vertical-align:top;
+  }
+  .course-table tr:last-child td{border-bottom:1px solid var(--rule);}
+  .course-table .cname{font-family:'Source Serif 4', serif; font-size:1.02rem; color:var(--ink);}
+  .course-table .cterm{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    text-align:right;
+    white-space:nowrap;
+    padding-left:16px;
+  }
+  .course-table .ceval{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--blue);
+    text-align:right;
+    white-space:nowrap;
+    padding-left:12px;
+    width:70px;
+  }
+
+  .mentor-note{
+    margin-top:34px;
+    padding:22px 24px;
+    background:var(--paper-alt);
+    border-left:3px solid var(--brick);
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    border-radius:0 3px 3px 0;
+  }
+  .mentor-note strong{color:var(--ink);}
+
+  footer{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:50px clamp(20px,5vw,0px) 90px;
+    border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--ink-faint);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="top">
-    <h1>Jiawei Huang <span class="cn">黄嘉炜</span></h1>
-    <nav aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#research">Research</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#contact">Contact</a>
-      <a href="CV_Jiawei_Huang.pdf">CV</a>
-    </nav>
-  </header>
-  <hr class="rule">
+<nav>
+  <span class="nav-name">J. HUANG</span>
+  <ul>
+    <li><a href="#main" class="navlink" data-target="main">Main</a></li>
+    <li><a href="#research" class="navlink" data-target="research">Research</a></li>
+    <li><a href="#teaching" class="navlink" data-target="teaching">Teaching</a></li>
+  </ul>
+</nav>
 
-  <div class="intro" id="about">
+<header class="hero" id="main">
+  <div class="hero-grid" style="grid-template-columns:1fr;">
     <div>
-      <p class="intro-lead">My research sits at the intersection of statistics, artificial intelligence, and business.</p>
-
-      <p>I am Assistant Professor of Data Science at <a href="https://www.clsbe.lisboa.ucp.pt/catolica-lisbon-school-business-economics">Católica Lisbon School of Business and Economics</a>. I received my Ph.D. in Business Analytics from the Carl H. Lindner College of Business at the University of Cincinnati, an M.S. in Statistics from the University of Wisconsin–Madison, and a B.S. in Statistics from Renmin University of China.</p>
-
-      <p>My research centers on two themes:</p>
-      <ol class="themes">
-        <li><span class="strand">Novel statistical methodology.</span> I contribute to nominal data analysis, configurational methods, and overparameterized models, with applications in socioeconomics, finance, and information systems.</li>
-        <li><span class="strand">AI adoption for analytics.</span> I study how AI is adopted for analytics, from large-scale text and organizational data to AI-supported experiments and systems.</li>
-      </ol>
-
-      <p>I am also actively engaged in industry collaboration. Working with several partners, I have developed methods and systems that were carried through from problem definition to deployment.</p>
+      <div class="eyebrow">Católica Lisbon School of Business &amp; Economics</div>
+      <h1>Jiawei Huang</h1>
+      <p class="role">I am a tenure-track <strong>Assistant Professor</strong> at <a href="https://www.clsbe.lisboa.ucp.pt/catolica-lisbon-school-business-economics" target="_blank" rel="noopener">Católica Lisbon School of Business &amp; Economics</a>, holding a Ph.D. in Business Analytics from the Department of Operations, Business Analytics, and Information Systems, Carl H. Lindner College of Business, University of Cincinnati. My research develops statistical methodology for complex business data — discrete data analysis and LLM-based methods for mixed-type, unstructured survey data, alongside machine learning and deep learning for high-dimensional, multimodal data — with applications in finance and organizational behavior.</p>
+      <div class="contact-line">
+        <span>+1 (608) 236-3665</span>
+        <a href="mailto:jhuang@ucp.pt">jhuang@ucp.pt</a>
+        <a href="#">Personal Website</a>
+        <a href="#">Google Scholar</a>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="CV_Jiawei_Huang.pdf" download>Download CV (PDF)</a>
+        <a class="btn" href="#research">See publications ↓</a>
+      </div>
     </div>
+  </div>
+</header>
+
+<section id="research" class="fade-in">
+  <div class="section-head">
+    <span class="num">01</span>
+    <h2>Research</h2>
+    <span class="rule"></span>
+  </div>
+
+  <div class="subhead">Manuscripts Under Review</div>
+  <div class="pub">
+    <div class="idx">1</div>
     <div>
-      <img class="portrait" src="profile.jpg" alt="Jiawei Huang">
-      <p class="affil"><a href="mailto:jhuang@ucp.pt">jhuang@ucp.pt</a><br>
-      <a href="https://scholar.google.com/citations?user=SL0rwXIAAAAJ&hl=en">Google Scholar</a><br>
-      <a href="https://www.linkedin.com/in/jiawei-huang-202b03206/">LinkedIn</a></p>
+      <div class="authors"><span class="me">Jiawei Huang</span>, Dungang Liu, Yuan Jiang, &amp; Yu Xie</div>
+      <div class="title">An “i-mobility” Framework for Studying Social Mobility: Individualized Inference via Generative Analysis of Discrete Data<span class="tag">Under review, JASA</span></div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="idx">2</div>
+    <div>
+      <div class="authors">Hui Guo, <span class="me">Jiawei Huang</span>, &amp; Yan Yu</div>
+      <div class="title">(Mis)Understanding Benign Overfitting in Equity Return Prediction<span class="tag">Major revision, Management Science</span></div>
     </div>
   </div>
 
-  <section id="research">
-    <h2>Research</h2>
+  <div class="subhead" style="margin-top:44px;">Peer-Reviewed Publications</div>
+  <div class="pub">
+    <div class="idx">3</div>
+    <div>
+      <div class="authors">Nam D. Nguyen, <span class="me">Jiawei Huang</span>, &amp; Daifeng Wang</div>
+      <div class="title">A Deep Manifold-Regularized Learning Model for Improving Phenotype Prediction from Multimodal Data</div>
+      <div class="venue">Nature Computational Science</div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="idx">4</div>
+    <div>
+      <div class="authors"><span class="me">Jiawei Huang</span>, Jie Sheng, &amp; Daifeng Wang</div>
+      <div class="title">Manifold Learning Analysis Suggests Strategies to Align Single-Cell Multimodal Data of Neuronal Electrophysiology and Transcriptomics</div>
+      <div class="venue">Communications Biology</div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="idx">5</div>
+    <div>
+      <div class="authors">Ting Jin, Peter Rehani, Mufang Ying, <span class="me">Jiawei Huang</span>, Shuang Liu, Panagiotis Roussos, &amp; Daifeng Wang</div>
+      <div class="title">scGRNom: A Computational Pipeline for Integrative Multi-Omics Analysis to Predict Cell-Type-Specific Disease Genes and Regulatory Networks</div>
+      <div class="venue">Genome Medicine</div>
+    </div>
+  </div>
 
-    <h3>Published</h3>
-    <ul class="entries">
-      <li class="entry">
-        <p class="authors">Nam D. Nguyen, <b>Jiawei Huang</b>, Daifeng Wang (2022)</p>
-        <p class="title">A Deep Manifold-Regularized Learning Model for Improving Phenotype Prediction from Multi-Modal Data</p>
-        <p class="venue"><em>Nature Computational Science</em>, 2(1), 38–46. <a href="https://www.nature.com/articles/s43588-021-00185-x">Article</a></p>
-      </li>
-      <li class="entry">
-        <p class="authors"><b>Jiawei Huang</b>, Jie Sheng, Daifeng Wang (2021)</p>
-        <p class="title">Manifold Learning Analysis Suggests Strategies to Align Single-Cell Multimodal Data of Neuronal Electrophysiology and Transcriptomics</p>
-        <p class="venue"><em>Communications Biology</em>, 4, 1308. <a href="https://www.nature.com/articles/s42003-021-02807-6">Article</a></p>
-      </li>
-      <li class="entry">
-        <p class="authors">Ting Jin, Peter Rehani, Mufang Ying, <b>Jiawei Huang</b>, Shuang Liu, Panagiotis Roussos, Daifeng Wang (2021)</p>
-        <p class="title">scGRNom: A Computational Pipeline of Integrative Multi-Omics Analyses for Predicting Cell-Type Disease Genes and Regulatory Networks</p>
-        <p class="venue"><em>Genome Medicine</em>, 13(1), 95. <a href="https://link.springer.com/article/10.1186/s13073-021-00908-9">Article</a></p>
-      </li>
+  <div class="subhead" style="margin-top:44px;">Other Work in Progress</div>
+  <div class="pub">
+    <div class="idx">6</div>
+    <div>
+      <div class="authors"><span class="me">Jiawei Huang</span>, Michael J. Fry, Scott Dust, Sharmeen M. Merchant, &amp; Luciana Zheng Manroop</div>
+      <div class="title">I Will Pay You Back in The Future: Examining Employees' On-Job Perceptions of Organizations and Their Intention of Making Post-Turnover Employment Referrals<span class="tag">Under review</span></div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="idx">7</div>
+    <div>
+      <div class="authors"><span class="me">Jiawei Huang</span>, Kanix Wang, &amp; Michael J. Fry</div>
+      <div class="title">Leveraging Generative AI Models for Textual Analysis in Healthcare Human Resources Operations<span class="tag">Major revision</span></div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="idx">8</div>
+    <div>
+      <div class="authors">Yanran Liu, Peng Wang, <span class="me">Jiawei Huang</span>, Zewei Lin, &amp; Arun Rai</div>
+      <div class="title">Finite-Sample Variable Prescreen Methods for Qualitative Comparative Analysis<span class="tag">In preparation</span></div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="idx">9</div>
+    <div>
+      <div class="authors"><span class="me">Jiawei Huang</span> &amp; Yanran Liu</div>
+      <div class="title">The Configuration-Regression Nexus: A Systematic Review of Methodological Friction and Integration<span class="tag">In preparation</span></div>
+    </div>
+  </div>
+
+  <h3 class="block-title">Industry Collaborations</h3>
+  <p class="collab-line">Ryerson Inc. · HSD Metrics · Drees Homes · ABC Fitness</p>
+
+  <h3 class="block-title">Presentations</h3>
+
+  <div class="pres-group">
+    <h4>An "i-Mobility" Framework for Studying Social Mobility</h4>
+    <ul>
+      <li><span class="when">10/2025</span> 2025 INFORMS Annual Meeting, Atlanta, GA — DMDA Workshop (refereed full paper) &amp; Job Market Showcase Session</li>
+      <li><span class="when">08/2025</span> Invited Session, Joint Statistical Meeting (JSM), Nashville, TN</li>
+      <li><span class="when">04/2025</span> Paper Competition with Award, KY-ASA Meeting, Lexington, KY</li>
+      <li><span class="when">08/2023</span> Contributed Session, Joint Statistical Meeting (JSM), Toronto, Canada</li>
+      <li><span class="when">05/2023</span> Refereed Session with Award, SDSS, St. Louis, MO</li>
     </ul>
+  </div>
 
-    <h3>Under review</h3>
-    <ul class="entries">
-      <li class="entry">
-        <p class="authors"><b>Jiawei Huang</b>, Dungang Liu, Yuan Jiang, Yu Xie</p>
-        <p class="title">An “<em>i</em>-Mobility” Framework for Studying Social Mobility: Individualized Inference via Generative Analysis of Discrete Data</p>
-        <p class="stamp">Under review</p>
-      </li>
-      <li class="entry">
-        <p class="authors"><b>Jiawei Huang</b>, Kanix Wang, Michael J. Fry</p>
-        <p class="title">Leveraging Generative AI Models for Textual Analysis in Healthcare Human Resources Operations</p>
-        <p class="stamp">Major revision</p>
-      </li>
-      <li class="entry">
-        <p class="authors">Hui Guo, <b>Jiawei Huang</b>, Yan Yu</p>
-        <p class="title">(Mis)Understanding Benign Overfitting in Equity Return Prediction</p>
-        <p class="stamp">Under review</p>
-      </li>
-      <li class="entry">
-        <p class="authors"><b>Jiawei Huang</b>, Michael J. Fry, Scott Dust, Sharmeen M. Merchant, Luciana Zheng Manroop</p>
-        <p class="title">I Will Pay You Back in the Future: Employees’ On-Job Perceptions of Organizations and Their Intention of Making Post-Turnover Employment Referrals</p>
-        <p class="stamp">Under review</p>
-      </li>
+  <div class="pres-group">
+    <h4>(Mis)Understanding Benign Overfitting</h4>
+    <ul>
+      <li><span class="when">05/2025</span> Refereed Session with Award, SDSS, Salt Lake City, UT</li>
+      <li><span class="when">12/2025</span> Invited Session presented by coauthor, IMS–ICSDS, Seville, Spain</li>
     </ul>
+  </div>
 
-    <h3>In progress</h3>
-    <ul class="entries">
-      <li class="entry">
-        <p class="authors">Yanran Liu, Peng Wang, <b>Jiawei Huang</b>, Zewei Lin, Arun Rai</p>
-        <p class="title">Finite-Sample Variable Prescreening Methods for Qualitative Comparative Analysis</p>
-      </li>
-      <li class="entry">
-        <p class="authors"><b>Jiawei Huang</b>, Yanran Liu</p>
-        <p class="title">The Configuration–Regression Nexus: A Systematic Review of Methodological Friction and Integration</p>
-      </li>
+  <div class="pres-group">
+    <h4>Gender Moderating Effects in Registered Nurses' (RNs) Turnover</h4>
+    <ul>
+      <li><span class="when">04/2024</span> Invited Session, Annual POMS Conference, Minneapolis, MN</li>
     </ul>
+  </div>
 
-    <h3>Industry-partnered research</h3>
-    <p class="note">Applied analytics projects with Ryerson Inc., HSD Metrics, Drees Homes, and ABC Fitness.</p>
-  </section>
+  <div class="pres-group">
+    <h4>Predicting Power Grid Failures using Self-Organized Criticality</h4>
+    <ul>
+      <li><span class="when">07/2025</span> Invited Discussant, International Risk Conference (MRS), Boston, MA</li>
+    </ul>
+  </div>
 
-  <section id="teaching">
+  <div class="pres-group">
+    <h4>Manifold Learning Applications in Single-Cell Multi-Modal Data</h4>
+    <ul>
+      <li><span class="when">06/2022</span> Contributed Poster, Symposium on Data Science and Statistics (SDSS), Pittsburgh, PA</li>
+    </ul>
+  </div>
+</section>
+
+<section id="teaching" class="fade-in">
+  <div class="section-head">
+    <span class="num">02</span>
     <h2>Teaching</h2>
+    <span class="rule"></span>
+  </div>
 
-    <h3>Católica Lisbon</h3>
-    <ul class="entries">
-      <li class="entry">
-        <p class="title">Causality and Randomized Experiments</p>
-        <p class="venue">Master's, 2027</p>
-      </li>
-      <li class="entry">
-        <p class="title">Business Research Methods</p>
-        <p class="venue">Master's, 2026</p>
-      </li>
-    </ul>
+  <div class="subhead">Independent Instructor — Graduate Courses</div>
+  <table class="course-table">
+    <tr>
+      <td class="cname">Business Research Methods</td>
+      <td class="cterm">Fall 2026</td>
+      <td class="ceval">—</td>
+    </tr>
+    <tr>
+      <td class="cname">Causality and Randomized Experiments</td>
+      <td class="cterm">Spring 2027</td>
+      <td class="ceval">—</td>
+    </tr>
+    <tr>
+      <td class="cname">Probability Models</td>
+      <td class="cterm">Fall 2025</td>
+      <td class="ceval">5.0 / 5.0</td>
+    </tr>
+    <tr>
+      <td class="cname">Statistical Computing</td>
+      <td class="cterm">Summer 2025</td>
+      <td class="ceval">4.6 / 5.0</td>
+    </tr>
+  </table>
 
-    <h3>University of Cincinnati</h3>
-    <ul class="entries">
-      <li class="entry">
-        <p class="title">Probability Models</p>
-        <p class="venue">Master's, 2025 — evaluation 5.0 / 5.0</p>
-      </li>
-      <li class="entry">
-        <p class="title">Statistical Computing</p>
-        <p class="venue">Master's, 2025 — evaluation 4.6 / 5.0</p>
-      </li>
-      <li class="entry">
-        <p class="title">Descriptive Analytics and Data Visualization</p>
-        <p class="venue">Undergraduate, 2024 and 2022 — evaluations 4.7 and 4.4 / 5.0</p>
-      </li>
-    </ul>
+  <div class="subhead" style="margin-top:44px;">Independent Instructor — Undergraduate Courses</div>
+  <table class="course-table">
+    <tr>
+      <td class="cname">Descriptive Analytics and Data Visualization</td>
+      <td class="cterm">Spring 2024</td>
+      <td class="ceval">4.7 / 5.0</td>
+    </tr>
+    <tr>
+      <td class="cname">Descriptive Analytics and Data Visualization</td>
+      <td class="cterm">Summer 2022</td>
+      <td class="ceval">4.4 / 5.0</td>
+    </tr>
+  </table>
 
-    <h3>Mentoring</h3>
-    <ul class="entries">
-      <li class="entry">
-        <p class="title">Discussant, MS dissertation defenses</p>
-        <p class="venue">University of Cincinnati, multiple cohorts</p>
-      </li>
-      <li class="entry">
-        <p class="title">Second reader, MSBA capstone projects</p>
-        <p class="venue">University of Cincinnati, multiple cohorts</p>
-      </li>
-      <li class="entry">
-        <p class="title">Mentor, UC Center for Business Analytics</p>
-        <p class="venue">Supervised two undergraduate students in Business Analytics and two master's students in Computer Science on industry projects with Drees Homes and ABC Fitness</p>
-      </li>
-    </ul>
-  </section>
+  <div class="mentor-note">
+    <strong>Student mentorship in research projects.</strong> Served as a mentor at the Center for Business Analytics on two projects with Drees Homes and ABC Fitness, guiding two Business Analytics undergraduates and two Computer Science master's students. Also served multiple times as second reader for capstone projects in the MSBA program.
+  </div>
+</section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Students and prospective collaborators are welcome to write to me at <a href="mailto:jhuang@ucp.pt">jhuang@ucp.pt</a>, or to reach out on <a href="https://www.linkedin.com/in/jiawei-huang-202b03206/">LinkedIn</a>.</p>
-    <p class="note"><a href="https://www.clsbe.lisboa.ucp.pt/catolica-lisbon-school-business-economics">Católica Lisbon School of Business and Economics</a><br>
-    Caminho de Palma de Cima, 1649-023 Lisboa, Portugal</p>
-  </section>
-
-  <footer>Last updated September 2026</footer>
-</div>
+<footer>
+  <span>© 2026 Jiawei Huang</span>
+  <span>Lisbon, Portugal</span>
+</footer>
 
 <script>
-(function(){
-  var links = [].slice.call(document.querySelectorAll('nav a[href^="#"]'));
-  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
-  if(!('IntersectionObserver' in window) || !sections.length) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting) return;
-      links.forEach(function(a){ a.classList.toggle('is-current', a.getAttribute('href') === '#' + e.target.id); });
+  // active nav link + smooth section highlight
+  const sections = ['main','research','teaching'].map(id => document.getElementById(id) || document.getElementById(id+'-body'));
+  const navLinks = document.querySelectorAll('.navlink');
+
+  function setActive(id){
+    navLinks.forEach(l => l.classList.toggle('active', l.dataset.target === id));
+  }
+
+  const observerTargets = [
+    {el: document.getElementById('main'), id:'main'},
+    {el: document.getElementById('research'), id:'research'},
+    {el: document.getElementById('teaching'), id:'teaching'}
+  ];
+
+  const navObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const match = observerTargets.find(t => t.el === entry.target);
+        if(match) setActive(match.id);
+      }
     });
-  }, { rootMargin:'-15% 0px -75% 0px' });
-  sections.forEach(function(s){ io.observe(s); });
-})();
+  }, {rootMargin: '-40% 0px -50% 0px'});
+
+  observerTargets.forEach(t => t.el && navObserver.observe(t.el));
+
+  // fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.08});
+  fadeEls.forEach(el => fadeObserver.observe(el));
 </script>
+
 </body>
 </html>
